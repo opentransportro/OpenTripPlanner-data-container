@@ -12,6 +12,7 @@
   },
   "updaters": [
     {
+      "id": "foli-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -20,6 +21,15 @@
       "fuzzyTripMatching": true
     },
     {
+      "id": "foli-alerts",
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://digitransit-proxy:8080/out/data.foli.fi/gtfs-rt/reittiopas",
+      "feedId": "FOLI",
+      "fuzzyTripMatching": false
+    },
+    {
+      "id": "oulu-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -28,6 +38,7 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "oulu-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
       "url": "http://digitransit-proxy:8080/out/92.62.36.215/RTIX/service-alerts",
@@ -35,6 +46,7 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "kuopio-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -43,6 +55,7 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "joensuu-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -51,6 +64,15 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "joensuu-alerts",
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://digitransit-proxy:8080/out/jojo.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
+      "feedId": "Joensuu",
+      "fuzzyTripMatching": false
+    },
+    {
+      "id": "lappeenranta-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -59,6 +81,7 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "tampere-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -67,6 +90,7 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "tampere-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
       "url": "http://digitransit-proxy:8080/out/tre.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
@@ -74,10 +98,28 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "foli-bike-rental",
       "type": "bike-rental",
       "sourceType": "smoove",
       "url": "http://digitransit-proxy:8080/out/data.foli.fi/citybike/smoove",
       "frequencySec": 10
+    },
+    {
+      "id": "linkki-trip-updates",
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://digitransit-proxy:8080/out/linkki.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
+      "feedId": "LINKKI",
+      "fuzzyTripMatching": false
+    },
+    {
+      "id": "linkki-alerts",
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://digitransit-proxy:8080/out/linkki.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
+      "feedId": "LINKKI",
+      "fuzzyTripMatching": false
     }
   ]
 }

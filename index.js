@@ -13,7 +13,7 @@ const every = promisify((list, task, cb) => {
   })
 })
 
-const start = promisify((task, cb) => gulp.start(task, cb))
+const start = promisify((task, cb) => gulp.series(task)(cb))
 
 const updateDEM = ['dem:update']
 const updateOSM = ['osm:update']

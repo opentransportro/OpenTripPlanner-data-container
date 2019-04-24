@@ -1,5 +1,4 @@
 const otpMatching = require('otp-matching')
-const col = require('ansi-colors')
 const { zipWithGlob } = require('../util')
 const fs = require('fs')
 const { dataDir, hostDataDir, constants } = require('../config.js')
@@ -34,7 +33,7 @@ const buildGraph = function (config) {
 
     buildGraph.stderr.on('data', function (data) {
       collectLog(data)
-      process.stdout.write(col.red(data.toString()))
+      process.stdout.write(data.toString())
       fs.writeSync(buildLog, data)
     })
 
@@ -103,6 +102,6 @@ module.exports = {
         return Promise.all([p1, p2, p3]).then(() => otpMatching(`${dataDir}/build/${config.id}/router`, config.id))
       })
     })).then(() => {
-      process.stdout.write(col.green('Created SUCCESS\n'))
+      process.stdout.write('Created SUCCESS\n')
     })
   } }

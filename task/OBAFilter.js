@@ -4,7 +4,6 @@
 const del = require('del')
 const exec = require('child_process').exec
 const through = require('through2')
-const col = require('ansi-colors')
 const fs = require('fs-extra')
 const path = require('path')
 const async = require('async')
@@ -63,7 +62,7 @@ module.exports = {
       const fileName = gtfsFile.split('/').pop()
       const relativeFilename = path.relative(dataDir, gtfsFile)
       if (fs.lstatSync(gtfsFile).isDirectory()) {
-        process.stdout.write(col.yellow(`${gtfsFile} not a file, deleting...\n`))
+        process.stdout.write(`${gtfsFile} not a file, deleting...\n`)
         fs.removeSync(gtfsFile)
         callback(null, null)
         return
@@ -71,7 +70,7 @@ module.exports = {
       const id = fileName.substring(0, fileName.indexOf('.'))
       const config = configs[id]
       if (config === undefined) {
-        process.stdout.write(col.yellow(`${gtfsFile} Could not find config for Id:${id}, ignoring filter...\n`))
+        process.stdout.write(`${gtfsFile} Could not find config for Id:${id}, ignoring filter...\n`)
         callback(null, null)
         return
       }
@@ -90,16 +89,16 @@ module.exports = {
               /* create zip named src from files in dst */
               zipDir(`${dataDir}/${src}`, `${dataDir}/${dst}`, () => {
                 del([`${dataDir}/${dst}`])
-                process.stdout.write(rule + ' ' + gtfsFile + col.green(' filter SUCCESS\n'))
+                process.stdout.write(rule + ' ' + gtfsFile + ' filter SUCCESS\n')
                 done()
               })
             } else {
               if (fs.lstatSync(dstDir).isDirectory()) {
-                process.stdout.write(col.yellow(`deleting ${dstDir}\n`))
+                process.stdout.write(`deleting ${dstDir}\n`)
                 fs.removeSync(dstDir)
               }
               hasFailures = true
-              process.stdout.write(rule + ' ' + gtfsFile + col.red(' filter FAILED\n'))
+              process.stdout.write(rule + ' ' + gtfsFile + ' filter FAILED\n')
               done()
             }
           })
@@ -113,7 +112,7 @@ module.exports = {
           }
         })
       } else {
-        process.stdout.write(gtfsFile + col.green(' filter skipped\n'))
+        process.stdout.write(gtfsFile + ' filter skipped\n')
         callback(null, file)
       }
     })

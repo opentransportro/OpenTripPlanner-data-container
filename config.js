@@ -11,7 +11,7 @@ const HSL_CONFIG = {
   'id': 'hsl',
   'src': [
     src('HSL', 'https://gtfsdata.blob.core.windows.net/hsl/hsl.zip', false),
-    src('HSLlautta', 'https://gtfsdata.blob.core.windows.net/hsl/HSLlautta.zip', false)
+    src('HSLlautta', 'http://lautta.net/db/gtfs_pk/gtfs.zip', false)
   ],
   'osm': 'hsl',
   'dem': 'hsl'
@@ -48,7 +48,7 @@ const WALTTI_CONFIG = {
     src('JoensuuEly', 'http://dev.hsl.fi/gtfs.waltti/posely_joensuu.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
     src('FOLI', 'http://data.foli.fi/gtfs/gtfs.zip', false, ['router-waltti/gtfs-rules/waltti.rule']),
     src('Lahti', 'http://www.lsl.fi/assets/uploads/google_transit.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Kuopio', 'http://dev.hsl.fi/gtfs.waltti/kuopio.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
+    src('Kuopio', 'http://karttapalvelu.kuopio.fi/google_transit/google_transit.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
     src('OULU', 'http://www.transitdata.fi/oulu/google_transit.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
     src('LINKKI', 'http://jakoon.jkl.fi/reittiopas/datajkl.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
     src('tampere', 'http://www.tampere.fi/ekstrat/ptdata/tamperefeed_deprecated.zip', false),
@@ -77,22 +77,43 @@ if (process.env.ROUTERS) {
   setCurrentConfig()
 }
 
-// EXTRA_SRC format should be {"FOLI": {"url": "http://data.foli.fi/gtfs/gtfs.zip",  "fit": false, "rules": ["router-waltti/gtfs-rules/waltti.rule"]}}
-// but you can only define, for example, new url and the other key value pairs will remain the same as they are defined in this file
+// EXTRA_SRC format should be {"FOLI": {"url": "http://data.foli.fi/gtfs/gtfs.zip",  "fit": false, "rules": ["router-waltti/gtfs-rules/waltti.rule"], "routers": ["hsl", "finland"]}}
+// but you can only define, for example, new url and the other key value pairs will remain the same as they are defined in this file. "routers" is always a mandatory field.
+// It is also possible to add completely new src by defining object with unused id or to remove a src by defining "remove": true
 const extraSrc = process.env.EXTRA_SRC !== undefined ? JSON.parse(process.env.EXTRA_SRC) : {}
 
+let usedSrc = []
 // add config to every source and override config values if they are defined in extraSrc
 for (let i = 0; i < ALL_CONFIGS.length; i++) {
   const cfg = ALL_CONFIGS[i]
   const cfgSrc = cfg.src
-  for (let j = 0; j < cfg.src.length; j++) {
+  for (let j = cfgSrc.length - 1; j >= 0; j--) {
     const src = cfgSrc[j]
-    if (extraSrc[src.id]) {
+    const id = src.id
+    if (extraSrc[id] && extraSrc[id].routers !== undefined && extraSrc[id].routers.includes(cfg.id)) {
+      usedSrc.push(id)
+      if (extraSrc[id].remove) {
+        cfgSrc.splice(j, 1)
+        continue
+      }
       cfgSrc[j] = { ...src, ...extraSrc[src.id] }
     }
     cfgSrc[j].config = cfg
   }
 }
+
+// Go through extraSrc keys to find keys that don't already exist in src and add those as new src
+Object.keys(extraSrc).forEach((id) => {
+  if (!usedSrc.includes(id)) {
+    const routers = extraSrc[id].routers
+    for (let i = 0; i < ALL_CONFIGS.length; i++) {
+      const cfg = ALL_CONFIGS[i]
+      if (routers !== undefined || routers.includes(cfg.id)) {
+        cfg.src.push({ ...extraSrc[id], id })
+      }
+    }
+  }
+})
 
 // create id->src-entry map
 const configMap = ALL_CONFIGS.map(cfg => cfg.src)

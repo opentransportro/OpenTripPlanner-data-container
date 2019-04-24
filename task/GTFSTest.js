@@ -2,7 +2,6 @@ const fs = require('fs')
 const fse = require('fs-extra')
 const exec = require('child_process').exec
 const through = require('through2')
-const col = require('ansi-colors')
 const { hostDataDir, dataDir, constants } = require('../config')
 const { postSlackMessage } = require('../util')
 const testTag = process.env.OTP_TAG || 'latest'
@@ -34,11 +33,11 @@ function testGTFS (gtfsFile, quiet = false) {
             build.on('exit', function (c) {
               if (c === 0) {
                 resolve(true)
-                process.stdout.write(gtfsFile + ' ' + col.green('Test SUCCESS\n'))
+                process.stdout.write(gtfsFile + ' Test SUCCESS\n')
               } else {
                 const log = lastLog.join('')
-                process.stdout.write(gtfsFile + ' ' + col.red(`Test FAILED (${c})\n`))
-                process.stdout.write(gtfsFile + ': ' + col.red(lastLog.join('')) + '\n')
+                process.stdout.write(gtfsFile + ` Test FAILED (${c})\n`)
+                process.stdout.write(gtfsFile + ': ' + lastLog.join('') + '\n')
                 postSlackMessage(`${gtfsFile} test failed: ${log}`)
                 resolve(false)
               }
@@ -64,8 +63,8 @@ function testGTFS (gtfsFile, quiet = false) {
             })
           } catch (e) {
             const log = lastLog.join('')
-            process.stdout.write(gtfsFile + ' ' + col.red(`Test FAILED (${e})\n`))
-            process.stdout.write(gtfsFile + ': ' + col.red(log) + '\n')
+            process.stdout.write(gtfsFile + ` Test FAILED (${e})\n`)
+            process.stdout.write(gtfsFile + ': ' + log + '\n')
             postSlackMessage(`${gtfsFile} test failed: ${log}`)
             fse.removeSync(folder)
             reject(e)

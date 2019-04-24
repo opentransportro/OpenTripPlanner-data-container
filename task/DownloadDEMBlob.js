@@ -1,4 +1,3 @@
-const col = require('ansi-colors')
 const crypto = require('crypto')
 const fs = require('fs')
 const request = require('request')
@@ -14,7 +13,7 @@ const compareHashes = (headerHash, localFilePath) => {
     let s = fs.ReadStream(localFilePath)
     // Download file as it's not found locally
     s.on('error', function (err) {
-      process.stdout.write(col.red(err))
+      process.stdout.write(err)
       reject('error') // eslint-disable-line
     })
     s.on('data', function (data) {
@@ -50,29 +49,29 @@ module.exports = function (entries) {
           compareHashes(downloadHash, readyPath)
             .then((resolved) => {
               if (resolved) {
-                process.stdout.write(col.green(`Local DEM data for ${entry.id} was already up-to-date\n`))
+                process.stdout.write(`Local DEM data for ${entry.id} was already up-to-date\n`)
                 dataAlreadyExists = true
                 // Abort download as remote has same md5 as local copy
                 r.abort()
               }
             }).catch((err) => {
               if (err === 'end') {
-                process.stdout.write(col.green(`${entry.url} hash value differs from local file's hash value\n`))
-                process.stdout.write(col.green(`Downloading new DEM data from ${entry.url}\n`))
+                process.stdout.write(`${entry.url} hash value differs from local file's hash value\n`)
+                process.stdout.write(`Downloading new DEM data from ${entry.url}\n`)
               } else if (err === 'error') {
-                process.stdout.write(col.red(`Failed to load local DEM data for ${entry.id}\n`))
-                process.stdout.write(col.green(`Downloading new DEM data from ${entry.url}\n`))
+                process.stdout.write(`Failed to load local DEM data for ${entry.id}\n`)
+                process.stdout.write(`Downloading new DEM data from ${entry.url}\n`)
               } else {
-                process.stdout.write(col.red(err))
-                process.stdout.write(col.red(`Failed to load local DEM data for ${entry.id}\n`))
-                process.stdout.write(col.green(`Downloading new DEM data from ${entry.url}\n`))
+                process.stdout.write(err)
+                process.stdout.write(`Failed to load local DEM data for ${entry.id}\n`)
+                process.stdout.write(`Downloading new DEM data from ${entry.url}\n`)
               }
             })
         }
       })
       r.on('error', err => {
-        process.stdout.write(col.red(err))
-        process.stdout.write(col.green(`Failed to load new DEM data for ${entry.id}\n`))
+        process.stdout.write(err)
+        process.stdout.write(`Failed to load new DEM data for ${entry.id}\n`)
         reject('fail') // eslint-disable-line
       })
       stream.on('finish', () => {
@@ -84,18 +83,18 @@ module.exports = function (entries) {
           compareHashes(downloadHash, filePath)
             .then((resolved) => {
               if (resolved) {
-                process.stdout.write(col.green(`Downloaded updated DEM data to ${filePath}\n`))
+                process.stdout.write(`Downloaded updated DEM data to ${filePath}\n`)
                 fs.rename(filePath, readyPath, (err) => {
                   if (err) {
                     if (fs.existsSync(filePath)) {
                       fs.unlinkSync(filePath)
                     }
-                    process.stdout.write(col.red(err))
-                    process.stdout.write(col.red(`Failed to move DEM data from ${readyPath}\n`))
+                    process.stdout.write(err)
+                    process.stdout.write(`Failed to move DEM data from ${readyPath}\n`)
                     reject('fail') // eslint-disable-line
                   } else {
                     process.stdout.write(
-                      col.green(`DEM data update process was successful for ${entry.id}\n`)
+                      `DEM data update process was successful for ${entry.id}\n`
                     )
                     resolve()
                   }
@@ -106,11 +105,11 @@ module.exports = function (entries) {
                 fs.unlinkSync(filePath)
               }
               if (err === 'end') {
-                process.stdout.write(col.red(`${entry.url} hash value differs from just downloaded file's hash value\n`))
+                process.stdout.write(`${entry.url} hash value differs from just downloaded file's hash value\n`)
               } else if (err === 'error') {
-                process.stdout.write(col.red(`Failed to load local DEM data for ${entry.id}\n`))
+                process.stdout.write(`Failed to load local DEM data for ${entry.id}\n`)
               } else {
-                process.stdout.write(col.red(err))
+                process.stdout.write(err)
               }
               reject('fail') // eslint-disable-line
             })
