@@ -2,7 +2,6 @@ const JSZip = require('jszip')
 const fs = require('fs')
 const converter = require('json-2-csv')
 const through = require('through2')
-const col = require('ansi-colors')
 const cloneable = require('cloneable-readable')
 
 function createFeedInfo (zip, file, csv, cb) {
@@ -74,7 +73,7 @@ module.exports = {
       const id = fileName.substring(0, fileName.indexOf('.'))
       process.stdout.write(gtfsFile + ' ' + 'Setting GTFS feed id to ' + id + '\n')
       setFeedId(gtfsFile, id, (action) => {
-        process.stdout.write(gtfsFile + ' ' + col.green('ID ' + action + ' SUCCESS\n'))
+        process.stdout.write(gtfsFile + ' ID ' + action + ' SUCCESS\n')
         file.contents = cloneable(fs.createReadStream(gtfsFile))
         callback(null, file)
       })

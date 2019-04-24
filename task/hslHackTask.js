@@ -1,5 +1,4 @@
 const exec = require('child_process').exec
-const col = require('ansi-colors')
 const fs = require('fs')
 const { dataToolImage, hostDataDir, constants } = require('../config.js')
 
@@ -27,12 +26,12 @@ module.exports = function () {
 
     hslHack.on('exit', function (c) {
       if (c === 0) {
-        process.stdout.write(col.green('HSL Hack SUCCESS\n'))
+        process.stdout.write('HSL Hack SUCCESS\n')
         resolve()
       } else {
         const e = lastLog.join('')
         reject(e)
-        process.stdout.write(col.red(`HSL Hack FAILED (${c})\n${e}\n`))
+        process.stdout.write(`HSL Hack FAILED (${c})\n${e}\n`)
       }
     })
 

@@ -1,6 +1,5 @@
 const through = require('through2')
 const request = require('request')
-const col = require('ansi-colors')
 const Vinyl = require('vinyl')
 const { postSlackMessage } = require('../util')
 
@@ -25,7 +24,7 @@ module.exports = function (entries) {
     const downloadHandler = (err, res, body) => {
       if (err) {
         postSlackMessage(`${entry.url} Download failed: ${err}. Using previous data instead.`)
-        process.stdout.write(entry.url + ' ' + col.red('Download FAILED\n'))
+        process.stdout.write(entry.url + ' Download FAILED\n')
         incProcessed()
         return
       }
@@ -34,7 +33,7 @@ module.exports = function (entries) {
       const file = new Vinyl({ path: `${entry.id !== undefined ? (entry.id + '.' + fileExt) : name}`, contents: Buffer.from(body) })
       stream.push(file)
 
-      process.stdout.write(entry.url + ' ' + col.green('Download SUCCESS\n'))
+      process.stdout.write(entry.url + ' Download SUCCESS\n')
       incProcessed()
     }
 

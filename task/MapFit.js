@@ -1,5 +1,4 @@
 const through = require('through2')
-const col = require('ansi-colors')
 const fs = require('fs')
 const path = require('path')
 const cloneable = require('cloneable-readable')
@@ -66,19 +65,19 @@ module.exports = {
       const id = fileName.substring(0, fileName.indexOf('.'))
       const config = configs[id]
       if (config === undefined) {
-        process.stdout.write(col.yellow(`${gtfsFile} Could not find config for Id:${id}, ignoring fit...\n`))
+        process.stdout.write(`${gtfsFile} Could not find config for Id:${id}, ignoring fit...\n`)
         callback(null, null)
         return
       }
       const osmFile = `${dataDir}/ready/osm/finland.pbf`
 
       if (!fs.existsSync(osmFile)) {
-        process.stdout.write(col.yellow(`${osmFile} not available, skipping ${gtfsFile}\n`))
+        process.stdout.write(`${osmFile} not available, skipping ${gtfsFile}\n`)
         callback(null, null)
         return
       }
       if (config.fit === false) {
-        process.stdout.write(gtfsFile + col.green(' fit skipped\n'))
+        process.stdout.write(gtfsFile + ' fit skipped\n')
         callback(null, file)
       } else {
         let script = ''
@@ -94,11 +93,11 @@ module.exports = {
           if (status === true) {
             fs.unlinkSync(src)
             fs.renameSync(dst, src)
-            process.stdout.write(gtfsFile + col.green(' fit SUCCESS\n'))
+            process.stdout.write(gtfsFile + ' fit SUCCESS\n')
             file.contents = cloneable(fs.createReadStream(gtfsFile))
             callback(null, file)
           } else {
-            process.stdout.write(gtfsFile + col.red(' fit FAILED\n'))
+            process.stdout.write(gtfsFile + ' fit FAILED\n')
             callback(null, null)
           }
         })

@@ -15,13 +15,15 @@
 
   "updaters": [
     {
+      "id": "hsl-trip-updates",
       "type": "MQTT-gtfs-rt-updater",
-      "url": "tcp://mqtt.hsl.fi",
+      "url": "tcp://mqtt.cinfra.fi",
       "topic": "gtfsrt/v1/fi/hsl/tu",
       "feedId": "HSL",
       "fuzzyTripMatching": true
     },
     {
+      "id": "hsl-rail-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -30,6 +32,7 @@
       "fuzzyTripMatching": true
     },
     {
+      "id": "hsl-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
       "url": "http://hslalert:8080/",
@@ -37,28 +40,32 @@
       "fuzzyTripMatching": true
     },
     {
+      "id": "hsl-bike-rental",
       "type": "bike-rental",
       "sourceType": "smoove",
       "url": "http://digitransit-proxy:8080/out/helsinki-fi.smoove.pro/api-public/stations",
       "frequencySec": 10
     },
     {
+      "id": "matka-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/beta.liikennevirasto.fi/joukkoliikenne/manual_gtfsrt/api/gtfsrt/updates",
+      "url": "http://digitransit-proxy:8080/out/beta.vayla.fi/joukkoliikenne/manual_gtfsrt/api/gtfsrt/updates",
       "feedId": "MATKA",
       "fuzzyTripMatching": true
     },
     {
+      "id": "matka-alerts",
       "type": "real-time-alerts",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/beta.liikennevirasto.fi/joukkoliikenne/manual_gtfsrt/api/gtfsrt/alerts",
+      "url": "http://digitransit-proxy:8080/out/beta.vayla.fi/joukkoliikenne/manual_gtfsrt/api/gtfsrt/alerts",
       "feedId": "MATKA",
       "fuzzyTripMatching": true
     },
     {
+      "id": "oulu-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -67,6 +74,7 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "oulu-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
       "url": "http://digitransit-proxy:8080/out/92.62.36.215/RTIX/service-alerts",
@@ -74,6 +82,7 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "tampere-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -82,10 +91,19 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "tampere-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
       "url": "http://digitransit-proxy:8080/out/tre.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
       "feedId": "tampere",
+      "fuzzyTripMatching": false
+    },
+    {
+      "id": "linkki-alerts",
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://digitransit-proxy:8080/out/linkki.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
+      "feedId": "LINKKI",
       "fuzzyTripMatching": false
     }
   ],

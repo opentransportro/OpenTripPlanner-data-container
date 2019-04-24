@@ -17,8 +17,10 @@
       "carParkCarLegWeight": 2,
       "itineraryFiltering": 2.0
   },
+  "routePreferenceSettings": "HSL",
   "updaters": [
     {
+      "id": "hsl-trip-updates",
       "type": "MQTT-gtfs-rt-updater",
       "url": "tcp://mqtt.cinfra.fi",
       "topic": "gtfsrt/v1/fi/hsl/tu",
@@ -26,6 +28,7 @@
       "fuzzyTripMatching": true
     },
     {
+      "id": "hsl-rail-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
@@ -34,6 +37,7 @@
       "fuzzyTripMatching": true
     },
     {
+      "id": "hsl-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
       "url": "http://hslalert:8080/",
@@ -41,18 +45,21 @@
       "fuzzyTripMatching": true
     },
     {
+      "id": "hsl-bike-rental",
       "type": "bike-rental",
       "sourceType": "smoove",
       "url": "http://digitransit-proxy:8080/out/helsinki-fi.smoove.pro/api-public/stations",
       "frequencySec": 10
     },
     {
+      "id": "hsl-bike-park",
       "type": "bike-park",
       "sourceType": "hsl-parkandride",
       "url": "http://digitransit-proxy:8080/out/p.hsl.fi/api/v1/facilities.json?limit=-1",
       "frequencySec": 600
     },
     {
+      "id": "hsl-car-park",
       "type": "car-park",
       "sourceType": "hsl-parkandride",
       "url": "http://digitransit-proxy:8080/out/p.hsl.fi/api/v1/facilities.json?limit=-1",

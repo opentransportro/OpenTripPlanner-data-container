@@ -1,5 +1,4 @@
 const through = require('through2')
-const col = require('ansi-colors')
 const Vinyl = require('vinyl')
 const execSync = require('child_process').execSync
 const fs = require('fs')
@@ -40,7 +39,7 @@ module.exports = function (configs, regexp) {
             const file = new Vinyl({ path: fileName, contents: Buffer.from(data) })
             stream.push(file)
             toProcess -= 1
-            process.stdout.write(fileName + ' ' + col.green('Seed SUCCESS\n'))
+            process.stdout.write(fileName + ' Seed SUCCESS\n')
             if (toProcess === 0) {
               stream.end()
             }

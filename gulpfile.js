@@ -1,7 +1,6 @@
 const fs = require('fs')
 const { execSync } = require('child_process')
 const gulp = require('gulp')
-const col = require('ansi-colors')
 const dl = require('./task/Download')
 const dlBlob = require('./task/DownloadDEMBlob')
 const { setFeedIdTask } = require('./task/setFeedId')
@@ -46,12 +45,16 @@ gulp.task('dem:update', function () {
   return Promise.all(promises)
     .catch((err) => {
       if (err === 'fail') {
-        process.stdout.write(col.red('Failing build because of a failed DEM download!\n'))
+        process.stdout.write('Failing build because of a failed DEM download!\n')
         postSlackMessage(`Failing build because of a failed DEM download.`)
         process.exit(1)
       }
     })
 })
+
+gulp.task('del:filter', () => del([`${config.dataDir}/filter`]))
+
+gulp.task('del:id', () => del([`${config.dataDir}/id`]))
 
 /**
  * download and test new gtfs data:
@@ -61,7 +64,7 @@ gulp.task('dem:update', function () {
  * 3. test zip loads with OpenTripPlanner
  * 4. copy to id dir if test is succesful
  */
-gulp.task('gtfs:dl', ['del:id'], function () {
+gulp.task('gtfs:dl', gulp.series('del:id', function () {
   const urlEntry = {}
   config.ALL_CONFIGS().map(cfg => cfg.src).reduce((acc, val) => acc.concat(val), []).forEach(
     (entry) => {
@@ -78,7 +81,7 @@ gulp.task('gtfs:dl', ['del:id'], function () {
   //    .pipe(vinylPaths(del))
     .pipe(testGTFSFile())
     .pipe(gulp.dest(`${config.dataDir}/fit/gtfs`))
-})
+}))
 
 // Add feedId to gtfs files in id dir, and moves files to directory 'fit'
 gulp.task('gtfs:id', function () {
@@ -88,18 +91,18 @@ gulp.task('gtfs:id', function () {
     .pipe(gulp.dest(`${config.dataDir}/ready/gtfs`))
 })
 
+gulp.task('hslHack', function () {
+  return hslHackTask()
+})
+
 // Run MapFit on gtfs files (based on config) and moves files to directory
 // 'filter'
-gulp.task('gtfs:fit', ['del:filter', 'hslHack'], function () {
+gulp.task('gtfs:fit', gulp.series('del:filter', 'hslHack', function () {
   return gulp.src([`${config.dataDir}/fit/gtfs/*`])
     .pipe(fitGTFSTask(config.configMap))
     // .pipe(vinylPaths(del))
     .pipe(gulp.dest(`${config.dataDir}/filter/gtfs`))
-})
-
-gulp.task('hslHack', function () {
-  return hslHackTask()
-})
+}))
 
 gulp.task('copyRouterConfig', function () {
   return gulp.src(['router-*/**']).pipe(
@@ -108,60 +111,48 @@ gulp.task('copyRouterConfig', function () {
 
 // Run one of more filter runs on gtfs files(based on config) and moves files to
 // directory 'ready'
-gulp.task('gtfs:filter', ['copyRouterConfig'], function () {
+gulp.task('gtfs:filter', gulp.series('copyRouterConfig', function () {
   return gulp.src([`${config.dataDir}/filter/gtfs/*`])
     .pipe(OBAFilterTask(config.configMap))
     // .pipe(vinylPaths(del))
     .pipe(gulp.dest(`${config.dataDir}/id/gtfs`))
-})
+}))
 
-gulp.task('del:ready', () => (del([`${config.dataDir}/ready`])))
+gulp.task('gtfs:del', () => del([`${config.dataDir}/ready/gtfs`]))
 
-gulp.task('del:filter', () => (del([`${config.dataDir}/filter`])))
-
-gulp.task('del:fit', () => (del([`${config.dataDir}/fit`])))
-
-gulp.task('del:id', () => (del([`${config.dataDir}/id`])))
-
-gulp.task('gtfs:del', () => (del([
-  `${config.dataDir}/ready/gtfs`])))
-
-gulp.task('gtfs:seed', ['gtfs:del'], function () {
+gulp.task('gtfs:seed', gulp.series('gtfs:del', function () {
   return Seed(config.ALL_CONFIGS(), /\.zip/).pipe(gulp.dest(`${config.dataDir}/ready/gtfs`))
-})
+}))
 
-gulp.task('osm:del', () => (del([
-  `${config.dataDir}/ready/osm`])))
+gulp.task('osm:del', () => del([`${config.dataDir}/ready/osm`]))
 
-gulp.task('osm:seed', ['osm:del'], function () {
+gulp.task('osm:seed', gulp.series('osm:del', function () {
   return Seed(config.ALL_CONFIGS(), /.pbf/).pipe(gulp.dest(`${config.dataDir}/ready/osm`))
-})
+}))
 
-gulp.task('dem:del', () => (del([
-  `${config.dataDir}/ready/dem`])))
+gulp.task('dem:del', () => del([`${config.dataDir}/ready/dem`]))
 
-gulp.task('dem:seed', ['dem:del'], function () {
+gulp.task('dem:seed', gulp.series('dem:del', function () {
   return Seed(config.ALL_CONFIGS(), /.tif/).pipe(gulp.dest(`${config.dataDir}/ready/dem`))
-})
+}))
 
 /**
  * Seed DEM, GTFS & OSM data with data from previous data-containes to allow
  * continuous flow of data into production when one or more updated data files
  * are broken.
  */
-gulp.task('seed', ['dem:seed', 'osm:seed', 'gtfs:seed'])
+gulp.task('seed', gulp.series('dem:seed', 'osm:seed', 'gtfs:seed'))
 
-gulp.task('router:del', () => (del([
-  `${config.dataDir}/build`])))
+gulp.task('router:del', () => del([`${config.dataDir}/build`]))
 
-gulp.task('router:copy', ['router:del'], function () {
+gulp.task('router:copy', gulp.series('router:del', function () {
   return prepareRouterData(config.ALL_CONFIGS()).pipe(gulp.dest(`${config.dataDir}/build`))
-})
+}))
 
-gulp.task('router:buildGraph', ['router:copy'], function () {
+gulp.task('router:buildGraph', gulp.series('router:copy', function () {
   gulp.src(['otp-data-container/*', 'otp-data-container/.*'])
     .pipe(gulp.dest(`${config.dataDir}/build/waltti`))
     .pipe(gulp.dest(`${config.dataDir}/build/finland`))
     .pipe(gulp.dest(`${config.dataDir}/build/hsl`))
   return buildOTPGraphTask(config.ALL_CONFIGS())
-})
+}))

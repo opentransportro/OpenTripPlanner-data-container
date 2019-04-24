@@ -15,7 +15,7 @@ BUILD_INTERVAL_SECONDS=$((($BUILD_INTERVAL - 1)*24*3600))
 BUILD_TIME=${BUILD_TIME:-23:00:00}
 #option to launch build automatically at early hours
 #as a mitigation to crashed builds. zero value disables this feature
-AUTO_REBUILD_HOUR=${AUTO_REBUILD_HOUR:-6}
+AUTO_REBUILD_HOUR=${AUTO_REBUILD_HOUR:-3}
 BUILDER_TYPE=${BUILDER_TYPE:-dev}
 
 # param: message text content
