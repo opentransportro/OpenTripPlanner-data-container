@@ -1,5 +1,5 @@
 FROM       alpine:latest
-MAINTAINER Digitransit version: 0.1
+MAINTAINER OpenTransport version: 0.1
 
 RUN apk add --update --no-cache \
   lighttpd \

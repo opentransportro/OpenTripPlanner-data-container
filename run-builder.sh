@@ -37,7 +37,7 @@ else
 fi
 
 if [ -n "$MESOS_CONTAINER_NAME"  ]; then
-  echo "search marathon.l4lb.thisdcos.directory" >> /etc/resolv.conf
+    echo "search marathon.l4lb.thisdcos.directory" >> /etc/resolv.conf
 fi
 
 # run data build loop forever, unless build interval is set to zero

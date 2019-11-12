@@ -31,7 +31,7 @@ python setup.py build
 python setup.py install
 cd ..
 
-git clone --recursive -b fastmapmatch https://github.com/HSLdevcom/gtfs_shape_mapfit.git
+git clone --recursive -b fastmapmatch https://gitlab.com/opentransport/gtfs_shape_mapfit.git
 cd gtfs_shape_mapfit
 make -C pymapmatch
 cd ..

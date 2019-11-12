@@ -3,7 +3,7 @@ set -e
 # This is run at ci, created an image that contains all the tools needed in
 # databuild
 
-ORG=${ORG:-hsldevcom}
+ORG=${ORG:-opentransport}
 DOCKER_IMAGE=otp-data-builder
 
 DOCKER_TAG="ci-${TRAVIS_COMMIT}"

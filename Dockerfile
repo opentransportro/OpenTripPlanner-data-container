@@ -1,5 +1,5 @@
 FROM       node:10-alpine
-MAINTAINER Digitransit version: 0.1
+MAINTAINER OpenTransport version: 0.1
 
 RUN apk add --update --no-cache \
   bash \
