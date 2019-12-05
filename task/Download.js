@@ -29,7 +29,7 @@ module.exports = function (entries) {
         return
       }
       const name = entry.url.split('/').pop()
-      const fileExt = name.split('.').pop()
+      var fileExt = name.split('.').pop() != name ? name.split('.').pop() : "zip" // if the provided file name does not contain any extension assume that the right one is .zip
       const remoteHash = res.headers['content-md5']
       const file = new Vinyl({ path: `${entry.id !== undefined ? (entry.id + '.' + fileExt) : name}`, contents: Buffer.from(body), hash: remoteHash })
       stream.push(file)

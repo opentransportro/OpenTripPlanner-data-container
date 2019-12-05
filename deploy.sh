@@ -7,10 +7,10 @@
 #DOCKER_AUTH
 set -e
 
-ROUTER_NAME=${1:-hsl}
+ROUTER_NAME=${1:-timisoara}
 DATE=`date +"%Y-%m-%d"`
 
-ORG=${ORG:-hsldevcom}
+ORG=${ORG:-opentransport}
 CONTAINER=opentripplanner-data-container
 DOCKER_IMAGE=$ORG/$CONTAINER-$ROUTER_NAME
 DOCKER_TEST_IMAGE=$DOCKER_IMAGE:test

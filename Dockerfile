@@ -14,9 +14,8 @@ RUN cd /opt/otp-data-builder ; tar xzf docker-18.06.1-ce.tgz ; cp docker/docker 
 ADD package-lock.json package.json *.js *.sh  gulpfile.js /opt/otp-data-builder/
 
 ADD task /opt/otp-data-builder/task
-ADD router-finland /opt/otp-data-builder/router-finland
-ADD router-hsl /opt/otp-data-builder/router-hsl
-ADD router-waltti /opt/otp-data-builder/router-waltti
+# ADD router-romania /opt/otp-data-builder/router-romania
+ADD router-timisoara /opt/otp-data-builder/router-timisoara
 ADD otp-data-container /opt/otp-data-builder/otp-data-container
 
 RUN npm install

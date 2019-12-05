@@ -23,7 +23,7 @@ let routers
 if (process.env.ROUTERS) {
   routers = process.env.ROUTERS.replace(/ /g, '').split(',')
 } else {
-  routers = ['finland', 'waltti', 'hsl']
+  routers = ['romania', 'timisoara']
 }
 
 start('seed').then(() => {
@@ -34,7 +34,7 @@ start('seed').then(() => {
   } else {
     const cronPattern = process.env.CRON || '0 0 3 * * *'
     process.stdout.write(`Starting timer with pattern: ${cronPattern}\n`)
-    new CronJob(cronPattern, update, null, true, 'Europe/Helsinki') // eslint-disable-line
+    new CronJob(cronPattern, update, null, true, 'Europe/Bucharest') // eslint-disable-line
   }
 }).catch((err) => {
   process.stdout.write(err + '\n')

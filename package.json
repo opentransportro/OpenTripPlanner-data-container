@@ -8,40 +8,34 @@
     "hslHack": "gulp hslHack",
     "copyRouterConfig": "gulp copyRouterConfig",
     "seed": "gulp seed",
-    
     "osm:seed": "gulp osm:seed",
     "osm:update": "gulp osm:update",
     "osm:del": "gulp osm:del",
-
     "dem:seed": "gulp dem:seed",
     "dem:update": "gulp dem:update",
     "dem:del": "gulp dem:del",
-
     "del:filter": "gulp del:filter",
     "del:id'": "gulp del:id'",
-
     "gtfs:seed": "gulp gtfs:seed",
     "gtfs:id": "gulp gtfs:id",
     "gtfs:dl": "gulp gtfs:dl",
     "gtfs:fit": "gulp gtfs:fit",
     "gtfs:filter": "gulp gtfs:filter",
     "gtfs:del": "gulp gtfs:del",
-
     "router:del": "gulp router:del",
     "router:copy": "gulp router:copy",
     "router:buildGraph": "gulp router:buildGraph"
   },
-
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HSLdevcom/OpenTripPlanner-data-container.git"
+    "url": "git+https://gitlab.com/opentransport/OpenTripPlanner-data-container.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/HSLdevcom/OpenTripPlanner-data-container/issues"
+    "url": "https://gitlab.com/opentransport/OpenTripPlanner-data-container/issues"
   },
-  "homepage": "https://github.com/HSLdevcom/OpenTripPlanner-data-container#readme",
+  "homepage": "https://gitlab.com/opentransport/OpenTripPlanner-data-container#readme",
   "dependencies": {
     "@slack/client": "^4.8.0",
     "async": "^2.5.0",

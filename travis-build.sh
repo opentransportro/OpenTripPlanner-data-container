@@ -6,7 +6,7 @@ set -e
 ORG=${ORG:-opentransport}
 DOCKER_IMAGE=otp-data-builder
 
-DOCKER_TAG="ci-${TRAVIS_COMMIT}"
+DOCKER_TAG="ci-${CI_COMMIT_SHORT_SHA:-latest}"
 # Set these environment variables
 #DOCKER_USER=
 #DOCKER_AUTH=
@@ -17,23 +17,22 @@ function tagandpush {
 }
 
 function imagedeploy {
-  if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-
+  if [ -z ${CI_MERGE_REQUEST_ID} ]; then
     docker login -u $DOCKER_USER -p $DOCKER_AUTH
-    if [ "$TRAVIS_TAG" ];then
-      echo "processing release $TRAVIS_TAG"
+    if [ "$CI_COMMIT_TAG" ];then
+      echo "processing release $CI_COMMIT_TAG"
       #release do not rebuild, just tag
       docker pull $ORG/$1:$DOCKER_TAG
       tagandpush $1 "prod" ""
     else
-      if [ "$TRAVIS_BRANCH" = "master" ]; then
-        echo "processing master build $TRAVIS_COMMIT"
+      if [ "$CI_COMMIT_REF_NAME" = "master" ]; then
+        echo "processing master build $CI_COMMIT_SHORT_SHA"
         #master branch, build and tag as latest
         docker build --tag="$ORG/$1:$DOCKER_TAG" .
         docker push $ORG/$1:$DOCKER_TAG
         tagandpush $1 "latest" ""
-      elif [ "$TRAVIS_BRANCH" = "next" ]; then
-        echo "processing master build $TRAVIS_COMMIT"
+      elif [ "$CI_COMMIT_REF_NAME" = "next" ]; then
+        echo "processing master build $CI_COMMIT_SHORT_SHA"
         #master branch, build and tag as latest
         docker build --tag="$ORG/$1:next-$DOCKER_TAG" .
         docker push $ORG/$1:next-$DOCKER_TAG
@@ -45,7 +44,7 @@ function imagedeploy {
       fi
     fi
   else
-    echo "processing pr $TRAVIS_PULL_REQUEST"
+    echo "processing pr $CI_MERGE_REQUEST_ID"
     docker build --tag="$ORG/$1:$DOCKER_TAG" .
   fi
 }

@@ -5,7 +5,7 @@
 
 ## This project:
 Contains tools for fetching, building and deploying fresh otp data-containers
-for consumption by hsl, waltti and finland otp instances.
+for consumption by romania and timisoara otp instances.
 
 ## Main components
 
@@ -38,15 +38,15 @@ It is possible to change the behaviour of the data builder by defining environme
 * (Optional, default latest) "OTP_TAG" defines what version of OTP is used for testing and building graphs.
 * (Optional, default latest) "TOOLS_TAG" defines what version of otp-data-tools image is used for testing.
 * (Optional, default ${process.cwd()}/data) "HOST_DATA" defines base path for volume directories.
-* (Optional, default 'finland, waltti, hsl') "ROUTERS" defines which data containers are being built and deployed.
+* (Optional, default 'romania, timisoara') "ROUTERS" defines which data containers are being built and deployed.
 * (Optional, default ${process.cwd()}/data) "DATA" defines base path for data directories in container's file system.
 * (Optional, default '0 0 3 * * *') "CRON" defines when data build is being run.
 * (Optional, default {}) "EXTRA_SRC" defines gtfs src values that should be overridden or completely new src that should be added with unique id. "routers" is always a mandatory field. Example format:
-  - `{"FOLI": {"url": "http://data.foli.fi/gtfs/gtfs.zip",  "fit": false, "rules": ["router-waltti/gtfs-rules/waltti.rule"], "routers": ["hsl", "finland"]}}`
+  - `{"FOLI": {"url": "http://data.foli.fi/gtfs/gtfs.zip",  "fit": false, "rules": ["router-timisoara/gtfs-rules/timisoara.rule"], "routers": ["timisoara", "romania"]}}`
   - You can remove a src by including "remove": true, `{"FOLI": {"remove": true, "routers": ["hsl"]}`
 * (Optional, default {}) "EXTRA_UPDATERS" defines router-config.json updater values that should be overridden or completely new updater that should be added with unique id. "routers" is always a mandatory field. Example format:
-  - `{"turku-alerts": {"type": "real-time-alerts", "frequencySec": 30, "url": "https://foli-beta.nanona.fi/gtfs-rt/reittiopas", "feedId": "FOLI", "fuzzyTripMatching": true, "routers": ["waltti"]}}`
-  - You can remove a src by including "remove": true, `{"turku-alerts": {"remove": true, "routers": ["waltti"]}`
+  - `{"turku-alerts": {"type": "real-time-alerts", "frequencySec": 30, "url": "https://foli-beta.nanona.fi/gtfs-rt/reittiopas", "feedId": "FOLI", "fuzzyTripMatching": true, "routers": ["timisoara"]}}`
+  - You can remove a src by including "remove": true, `{"turku-alerts": {"remove": true, "routers": ["timisoara"]}`
 * (Optional, default 1.23) "DOCKER_API_VERSION" defines what docker API version is used in docker commands.
 
 #### Data processing steps
@@ -105,9 +105,8 @@ exexuting the command 'node index.js once'. The end result of the build is 2 doc
 Digitransit-deployer detects the changes and restarts OTP instances, so that new data becomes in use.
 
 Each data container image runs a http server listening to port 8080, serving both a gtfs data bundle and a pre-built graph:
-- hsl: http://localhost:8080/router-hsl.zip and graph-hsl-<otpversion>.zip
-- waltti: http://localhost:8080/router-waltti.zip and graph-waltti-<otpversion>.zip
-- finland: http://localhost:8080/router-finland.zip and graph-finland-<otpversion>.zip
+- timisoara: http://localhost:8080/router-timisoara.zip and graph-timisoara-<otpversion>.zip
+- romania: http://localhost:8080/router-romania.zip and graph-romania-<otpversion>.zip
 
 ### otp-data-tools
 Contains tools for gtfs manipulation, such as One Bus Away gtfs filter.

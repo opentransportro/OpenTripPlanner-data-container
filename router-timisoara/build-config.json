@@ -3,8 +3,6 @@
   "staticParkAndRide": false,
   "parentStopLinking": true,
   "subwayAccessTime": 0,
-  "osmWayPropertySet": "finland",
-  "fares": "HSL",
+  "osmWayPropertySet": "romania",
   "elevationUnitMultiplier": 0.1,
-  "vertexConnector": "HSL"
 }
