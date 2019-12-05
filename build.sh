@@ -8,8 +8,8 @@ DOCKER_IMAGE=otp-data-builder
 
 DOCKER_TAG="ci-${CI_COMMIT_SHORT_SHA:-latest}"
 # Set these environment variables
-#DOCKER_USER=
-#DOCKER_AUTH=
+DOCKER_USER=vladvesa 
+DOCKER_AUTH=vlad8523
 
 function tagandpush {
   docker tag $ORG/$1:$3$DOCKER_TAG $ORG/$1:$2

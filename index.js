@@ -23,7 +23,7 @@ let routers
 if (process.env.ROUTERS) {
   routers = process.env.ROUTERS.replace(/ /g, '').split(',')
 } else {
-  routers = ['romania', 'timisoara']
+  routers = ['timisoara']
 }
 
 start('seed').then(() => {

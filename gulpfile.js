@@ -20,8 +20,7 @@ const { postSlackMessage } = require('./util')
  * Download and test new osm data
  */
 gulp.task('osm:update', function () {
-  const map = config.ALL_CONFIGS().map(cfg => cfg.osm)/*.concat('romania')*/.reduce((acc, val) => { acc[val] = true; return acc }, {})
-  console.log(map)
+  const map = config.ALL_CONFIGS().map(cfg => cfg.osm).reduce((acc, val) => { acc[val] = true; return acc }, {})
   const urls = Object.keys(map).map(key => config.osmMap[key])
   return dl(urls, true, true)
     .pipe(gulp.dest(`${config.dataDir}/downloads/osm`))
@@ -158,6 +157,6 @@ gulp.task('router:copy', gulp.series('router:del', function () {
 gulp.task('router:buildGraph', gulp.series('router:copy', function () {
   gulp.src(['otp-data-container/*', 'otp-data-container/.*'])
     .pipe(gulp.dest(`${config.dataDir}/build/timisoara`))
-    .pipe(gulp.dest(`${config.dataDir}/build/romania`))
+    // .pipe(gulp.dest(`${config.dataDir}/build/romania`))
   return buildOTPGraphTask(config.ALL_CONFIGS())
 }))
