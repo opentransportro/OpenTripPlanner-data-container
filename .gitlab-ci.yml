@@ -4,7 +4,7 @@ build:
   services:
     - docker:dind
   before_script:
-    - apk add --update nodejs npm
+    - apk add --update nodejs npm bash
     - npm install
   script:
     - chmod +x ./build.sh
