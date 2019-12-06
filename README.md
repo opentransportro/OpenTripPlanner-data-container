@@ -1,8 +1,5 @@
 # Build process for OpenTripPlanner-data-container
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/HSLdevcom/OpenTripPlanner-data-container.svg)](https://greenkeeper.io/)
-[![Build](https://api.travis-ci.org/HSLdevcom/OpenTripPlanner-data-container.svg?branch=master)](https://travis-ci.org/HSLdevcom/OpenTripPlanner-data-container)
-
 ## This project:
 Contains tools for fetching, building and deploying fresh otp data-containers
 for consumption by romania and timisoara otp instances.
@@ -25,8 +22,8 @@ install app deps:
 update osm data:
   `gulp osm:update`
 
-download new gtfs data for waltti:
-  `ROUTERS=waltti gulp gtfs:dl`
+download new gtfs data for timisoara:
+  `ROUTERS=timisoara gulp gtfs:dl`
 
 #### Configuration
 It is possible to change the behaviour of the data builder by defining environment variables.
@@ -42,8 +39,8 @@ It is possible to change the behaviour of the data builder by defining environme
 * (Optional, default ${process.cwd()}/data) "DATA" defines base path for data directories in container's file system.
 * (Optional, default '0 0 3 * * *') "CRON" defines when data build is being run.
 * (Optional, default {}) "EXTRA_SRC" defines gtfs src values that should be overridden or completely new src that should be added with unique id. "routers" is always a mandatory field. Example format:
-  - `{"FOLI": {"url": "http://data.foli.fi/gtfs/gtfs.zip",  "fit": false, "rules": ["router-timisoara/gtfs-rules/timisoara.rule"], "routers": ["timisoara", "romania"]}}`
-  - You can remove a src by including "remove": true, `{"FOLI": {"remove": true, "routers": ["hsl"]}`
+  - `{"STPT": {"url": "https://api.opentransport.ro/gtfs/v1/static",  "fit": false, "rules": ["router-timisoara/gtfs-rules/timisoara.rule"], "routers": ["timisoara", "romania"]}}`
+  - You can remove a src by including "remove": true, `{"STPT": {"remove": true, "routers": ["timisoara"]}`
 * (Optional, default {}) "EXTRA_UPDATERS" defines router-config.json updater values that should be overridden or completely new updater that should be added with unique id. "routers" is always a mandatory field. Example format:
   - `{"turku-alerts": {"type": "real-time-alerts", "frequencySec": 30, "url": "https://foli-beta.nanona.fi/gtfs-rt/reittiopas", "feedId": "FOLI", "fuzzyTripMatching": true, "routers": ["timisoara"]}}`
   - You can remove a src by including "remove": true, `{"turku-alerts": {"remove": true, "routers": ["timisoara"]}`
