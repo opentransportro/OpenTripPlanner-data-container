@@ -24,7 +24,7 @@ const TIMISOARA_CONFIG = {
 
   'id': 'timisoara',
   'src': [
-    src('stpt', 'http://api.opentransport.ro/gtfs/v1/static', false)
+    src('stpt', 'https://api.opentransport.ro/gtfs/v1/static', false)
   ],
   'osm': 'timisoara'
   // 'dem': 'timisoara'
