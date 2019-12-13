@@ -15,127 +15,18 @@
 
   "updaters": [
     {
-      "id": "hsl-trip-updates",
-      "type": "MQTT-gtfs-rt-updater",
-      "url": "tcp://mqtt.cinfra.fi",
-      "topic": "gtfsrt/v2/fi/hsl/tu",
-      "feedId": "HSL",
-      "fuzzyTripMatching": true
-    },
-    {
-      "id": "hsl-rail-trip-updates",
-      "type": "stop-time-updater",
-      "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://raildigitraffic2gtfsrt:8080/hsl/0/1/0/1",
-      "feedId": "HSL",
-      "fuzzyTripMatching": true
-    },
-    {
-      "id": "hsl-alerts",
-      "type": "real-time-alerts",
-      "frequencySec": 30,
-      "url": "https://api.digitransit.fi/realtime/service-alerts/v2/hsl",
-      "feedId": "HSL",
-      "fuzzyTripMatching": true
-    },
-    {
-      "id": "hsl-bike-rental",
+      "id": "velotm-bike-rental",
       "type": "bike-rental",
-      "sourceType": "smoove",
-      "url": "http://digitransit-proxy:8080/out/helsinki-fi.smoove.pro/api-public/stations",
-      "frequencySec": 10
-    },
-    {
-      "id": "matka-trip-updates",
-      "type": "stop-time-updater",
       "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/beta.vayla.fi/joukkoliikenne/manual_gtfsrt/api/gtfsrt/updates",
-      "feedId": "MATKA",
-      "fuzzyTripMatching": true
+      "sourceType": "velotm",
+      "url": "http://velotm.ro/Station/Read"
     },
     {
-      "id": "matka-alerts",
-      "type": "real-time-alerts",
+      "id": "clujbike-bike-rental",
+      "type": "bike-rental",
       "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/beta.vayla.fi/joukkoliikenne/manual_gtfsrt/api/gtfsrt/alerts",
-      "feedId": "MATKA",
-      "fuzzyTripMatching": true
-    },
-    {
-      "id": "oulu-trip-updates",
-      "type": "stop-time-updater",
-      "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/92.62.36.215/RTIX/trip-updates",
-      "feedId": "OULU",
-      "fuzzyTripMatching": false
-    },
-    {
-      "id": "oulu-alerts",
-      "type": "real-time-alerts",
-      "frequencySec": 30,
-      "url": "http://digitransit-proxy:8080/out/92.62.36.215/RTIX/service-alerts",
-      "feedId": "OULU",
-      "fuzzyTripMatching": false
-    },
-    {
-      "id": "tampere-trip-updates",
-      "type": "stop-time-updater",
-      "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/tre.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
-      "feedId": "tampere",
-      "fuzzyTripMatching": false
-    },
-    {
-      "id": "tampere-alerts",
-      "type": "real-time-alerts",
-      "frequencySec": 30,
-      "url": "http://digitransit-proxy:8080/out/tre.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
-      "feedId": "tampere",
-      "fuzzyTripMatching": false
-    },
-    {
-      "id": "linkki-alerts",
-      "type": "real-time-alerts",
-      "frequencySec": 30,
-      "url": "http://digitransit-proxy:8080/out/linkki.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
-      "feedId": "LINKKI",
-      "fuzzyTripMatching": false
-    },
-    {
-      "id": "samocat-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "samocat",
-      "url": "http://digitransit-proxy:8080/out/finagent.samocat.net/api/stations_info/",
-      "frequencySec": 10
-    },
-    {
-      "id": "vantaa-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "sharingos",
-      "network": "vantaa",
-      "url": "http://digitransit-proxy:8080/out/en-api.sharingos.com/v1/open_api/index.ashx?t=station_list",
-      "frequencySec": 10
-    },
-    {
-      "id": "foli-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "smoove",
-      "url": "http://digitransit-proxy:8080/out/data.foli.fi/citybike/smoove",
-      "frequencySec": 10,
-      "network": "turku"
-    },
-    {
-      "id": "oulu-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "next-bike",
-      "url": "http://digitransit-proxy:8080/out/poland.nextbike.net/maps/nextbike-official.xml?domains=fo",
-      "frequencySec": 10,
-      "network": "oulu"
+      "sourceType": "velotm",
+      "url": "https://portal.clujbike.eu/Station/Read"
     }
   ],
   "boardTimes": {

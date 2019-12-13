@@ -2,7 +2,5 @@
   "areaVisibility": true,
   "staticParkAndRide": false,
   "parentStopLinking": true,
-  "subwayAccessTime": 0,
-  "osmWayPropertySet": "romania",
-  "elevationUnitMultiplier": 0.1,
+  "osmWayPropertySet": "romania"
 }

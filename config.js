@@ -7,21 +7,16 @@
  */
 const src = (id, url, fit, rules) => ({ id, url, fit, rules })
 
-// const ROMANIA_CONFIG = {
-//   'id': 'romania',
-//   'src': [
-//     src('STPT', 'https://infopalvelut.storage.hsldev.com/gtfs/hsl.zip', false),
-//     src('CFR', 'https://gtfsdatav2.blob.core.windows.net/gtfsdata-blob/matka.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-romania/gtfs-rules/matka.rule', 'router-romania/gtfs-rules/matka-id.rule']),
-//     src('tampere', 'http://www.tampere.fi/ekstrat/ptdata/tamperefeed_deprecated.zip', false),
-//     src('LINKKI', 'https://tvv.fra1.digitaloceanspaces.com/209.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
-//     src('lautta', 'http://lautta.net/db/gtfs/gtfs.zip', false),
-//     src('OULU', 'https://assets.oulunliikenne.fi/gtfs_google/google_transit.zip', false)
-//   ],
-//   'osm': 'romania'
-// }
+const ROMANIA_CONFIG = {
+  'id': 'romania',
+  'src': [
+    src('stpt', 'https://api.opentransport.ro/gtfs/v1/static', false)
+  ],
+  'osm': 'romania'
+  // 'dem': 'romania'
+}
 
 const TIMISOARA_CONFIG = {
-
   'id': 'timisoara',
   'src': [
     src('stpt', 'https://api.opentransport.ro/gtfs/v1/static', false)
@@ -34,8 +29,7 @@ let ALL_CONFIGS
 
 const setCurrentConfig = (name) => {
   ALL_CONFIGS = [
-    TIMISOARA_CONFIG
-    /*, ROMANIA_CONFIG */
+    TIMISOARA_CONFIG, ROMANIA_CONFIG
   ].reduce((acc, nxt) => {
     if ((name && name.split(',').indexOf(nxt.id) !== -1) ||
       name === undefined) {
@@ -101,7 +95,7 @@ const configMap = ALL_CONFIGS.map(cfg => cfg.src)
   }, {})
 
 const osm = [
-  // { id: 'romania', url: 'http://download.geofabrik.de/europe/romania-latest.osm.pbf' },
+  { id: 'romania', url: 'https://download.geofabrik.de/europe/romania-latest.osm.pbf' },
   { id: 'timisoara', url: 'https://github.com/vesavlad/romania-osm-data/raw/master/timisoara.pbf' }
 ]
 

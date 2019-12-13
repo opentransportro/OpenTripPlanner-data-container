@@ -16,8 +16,8 @@ function shutdown() {
 }
 
 echo "Making sure there are no old test containers or image available"
-# docker stop otp-data-romania || true
-# docker stop otp-romania || true
+docker stop otp-data-romania || true
+docker stop otp-romania || true
 docker stop otp-data-timisoara || true
 docker stop otp-timisoara || true
 docker rmi --force $DOCKER_IMAGE || true
