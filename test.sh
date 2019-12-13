@@ -51,10 +51,10 @@ echo "Got otp ip: $IP"
 
 if [ "$ROUTER_NAME" == "timisoara" ]; then
     MAX_WAIT=30
-    URL="http://$IP:8080/otp/routers/default/plan?fromPlace=60.19812876015124%2C24.934051036834713&toPlace=60.218630210423306%2C24.807472229003906"
+    URL="http://$IP:8080/otp/routers/default/plan?fromPlace=45.747827%2c21.241217&toPlace=45.766714%2C21.228736"
 else
     MAX_WAIT=60
-    URL="http://$IP:8080/otp/routers/default/plan?fromPlace=60.19812876015124%2C24.934051036834713&toPlace=60.218630210423306%2C24.807472229003906"
+    URL="http://$IP:8080/otp/routers/default/plan?fromPlace=45.747827%2c21.241217&toPlace=45.766714%2C21.228736"
 fi
 
 ITERATIONS=$(($MAX_WAIT * 6))
