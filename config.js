@@ -10,7 +10,8 @@ const src = (id, url, fit, rules) => ({ id, url, fit, rules })
 const ROMANIA_CONFIG = {
   'id': 'romania',
   'src': [
-    src('stpt', 'https://api.opentransport.ro/gtfs/v1/static', false)
+    src('stpt', 'https://api.opentransport.ro/gtfs/v1/static', false),
+    src('informatica-feroviara', 'https://github.com/vesavlad/romania-osm-data/raw/master/informatica-feroviara-gtfs.zip', false)
   ],
   'osm': 'romania'
   // 'dem': 'romania'
