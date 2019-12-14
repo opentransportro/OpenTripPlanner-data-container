@@ -59,7 +59,7 @@ while true; do
     echo "** Launching OTP data builder"
 
     #note: busybox timeout
-    timeout $MAX_TIME node index.js once
+    timeout -t $MAX_TIME node index.js once
     SUCCESS=$?
 
     if [ $SUCCESS = 143 ]; then
@@ -75,7 +75,7 @@ while true; do
     if [ $SUCCESS -ne 0 ]; then
         # try once more
         echo "** Restarting builder once"
-        timeout $MAX_TIME  node index.js once
+        timeout -t $MAX_TIME  node index.js once
         SUCCESS=$?
 
         if [ $SUCCESS = 143 ]; then
