@@ -50,10 +50,8 @@ function imagedeploy {
   fi
 }
 
-imagedeploy "otp-data-builder"
+cd ${PWD} && imagedeploy "otp-data-builder"
 
-cd otp-data-tools
-
-imagedeploy "otp-data-tools"
+cd otp-data-tools && imagedeploy "otp-data-tools"
 
 echo Build completed
