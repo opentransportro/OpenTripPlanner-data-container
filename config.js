@@ -17,20 +17,11 @@ const ROMANIA_CONFIG = {
   // 'dem': 'romania'
 }
 
-const TIMISOARA_CONFIG = {
-  'id': 'timisoara',
-  'src': [
-    src('stpt', 'https://api.opentransport.ro/gtfs/v1/static', false)
-  ],
-  'osm': 'timisoara'
-  // 'dem': 'timisoara'
-}
-
 let ALL_CONFIGS
 
 const setCurrentConfig = (name) => {
   ALL_CONFIGS = [
-    TIMISOARA_CONFIG, ROMANIA_CONFIG
+    ROMANIA_CONFIG
   ].reduce((acc, nxt) => {
     if ((name && name.split(',').indexOf(nxt.id) !== -1) ||
       name === undefined) {
@@ -97,7 +88,6 @@ const configMap = ALL_CONFIGS.map(cfg => cfg.src)
 
 const osm = [
   { id: 'romania', url: 'https://download.geofabrik.de/europe/romania-latest.osm.pbf' },
-  { id: 'timisoara', url: 'https://github.com/vesavlad/romania-osm-data/raw/master/timisoara.pbf' }
 ]
 
 const dem = [
