@@ -91,8 +91,6 @@ const osm = [
 ]
 
 const dem = [
-  // { id: 'romania', url: 'https://elevdata.blob.core.windows.net/elevation/waltti/waltti-10m-elevation-model_20190927.tif' },
-  // { id: 'timisoara', url: 'https://elevdata.blob.core.windows.net/elevation/hsl/hsl-10m-elevation-model_20190920.tif' }
 ]
 
 const constants = {

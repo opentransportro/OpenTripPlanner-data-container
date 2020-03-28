@@ -7,7 +7,7 @@
 #DOCKER_AUTH
 set -e
 
-ROUTER_NAME=${1:-timisoara}
+ROUTER_NAME=${1:-romania}
 DATE=`date +"%Y-%m-%d"`
 
 ORG=${ORG:-opentransport}

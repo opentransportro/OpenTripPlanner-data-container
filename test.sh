@@ -4,7 +4,7 @@ set +e
 # set defaults
 ORG=${ORG:-opentransport}
 JAVA_OPTS=${JAVA_OPTS:--Xmx10g}
-ROUTER_NAME=${1:-timisoara}
+ROUTER_NAME=${1:-romania}
 TEST_TAG=${2:-latest}
 TOOLS_TAG=${3:-latest}
 DOCKER_IMAGE=$ORG/opentripplanner-data-container-$ROUTER_NAME:test
@@ -18,8 +18,6 @@ function shutdown() {
 echo "Making sure there are no old test containers or image available"
 docker stop otp-data-romania || true
 docker stop otp-romania || true
-docker stop otp-data-timisoara || true
-docker stop otp-timisoara || true
 docker rmi --force $DOCKER_IMAGE || true
 cd data/build/$ROUTER_NAME
 echo "Building data-container image..."
