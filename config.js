@@ -87,7 +87,7 @@ const configMap = ALL_CONFIGS.map(cfg => cfg.src)
   }, {})
 
 const osm = [
-  { id: 'romania', url: 'https://download.geofabrik.de/europe/romania-latest.osm.pbf' },
+  { id: 'romania', url: 'https://download.geofabrik.de/europe/romania-latest.osm.pbf' }
 ]
 
 const dem = [
