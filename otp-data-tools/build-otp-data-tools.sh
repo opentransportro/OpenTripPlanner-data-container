@@ -3,11 +3,11 @@
 set +e
 apt-get update && \
   apt-get -y install \
-    git build-essential python-dev protobuf-compiler libprotobuf-dev \
+    git build-essential python-dev protobuf-compiler cmake libprotobuf-dev \
     make swig g++ python-dev libreadosm-dev \
     libboost-graph-dev libproj-dev libgoogle-perftools-dev \
     osmctools unzip zip python-pyproj wget python-argh \
-    python-scipy python-sklearn python-pip python-numpy curl
+    python-scipy python-sklearn python-pip python-numpy curl zlib1g-dev libosmium2-dev
 
 rm -rf /var/lib/apt/lists/*
 
@@ -31,10 +31,19 @@ python setup.py build
 python setup.py install
 cd ..
 
-git clone --recursive -b fastmapmatch https://gitlab.com/opentransport/gtfs_shape_mapfit.git
+git clone --recursive -b fastmapmatch https://github.com/opentransportro/gtfs_shape_mapfit.git
 cd gtfs_shape_mapfit
 make -C pymapmatch
 cd ..
 
-git clone https://gitlab.com/opentransport/OTPQA.git
+git clone https://github.com/opentransportro/OTPQA.git
+
+# install pfaelde used for shapeing the OSM data over openstreet data
+git clone --recurse-submodules https://github.com/opentransportro/pfaedle
+cd pfaedle
+mkdir build && cd build
+cmake ..
+make -j
+make install
+
 
