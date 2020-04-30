@@ -14,9 +14,9 @@ ORG=${ORG:-opentransport}
 CONTAINER=opentripplanner-data-container
 DOCKER_IMAGE=$ORG/$CONTAINER-$ROUTER_NAME
 DOCKER_TEST_IMAGE=$DOCKER_IMAGE:test
-if [ ! -v DOCKER_TAG ]; then
-    DOCKER_TAG="ci-${TRAVIS_COMMIT}"
-fi
+# if [ ! -v DOCKER_TAG ]; then
+    # DOCKER_TAG="ci-${TRAVIS_COMMIT}"
+# fi
 
 echo "*** Testing $ROUTER_NAME..."
 
@@ -25,23 +25,23 @@ echo "*** Testing $ROUTER_NAME..."
 echo "*** $ROUTER_NAME tests passed"
 docker login -u $DOCKER_USER -p $DOCKER_AUTH
 
-if [ -v DOCKER_TAG ] && [ "$DOCKER_TAG" != "undefined" ]; then
-    DOCKER_DATE_IMAGE=$DOCKER_IMAGE:$DATE-$DOCKER_TAG
-    DOCKER_CUSTOM_IMAGE_TAG=$DOCKER_IMAGE:$DOCKER_TAG
-    docker tag $DOCKER_TEST_IMAGE $DOCKER_DATE_IMAGE
-    echo "*** Pushing $DOCKER_DATE_IMAGE"
-    docker push $DOCKER_DATE_IMAGE
-    docker tag $DOCKER_TEST_IMAGE $DOCKER_CUSTOM_IMAGE_TAG
-    echo "*** Pushing $DOCKER_CUSTOM_IMAGE_TAG"
-    docker push $DOCKER_CUSTOM_IMAGE_TAG
-else
-    DOCKER_DATE_IMAGE=$DOCKER_IMAGE:$DATE-latest
-    DOCKER_LATEST_IMAGE=$DOCKER_IMAGE:latest
-    docker tag $DOCKER_TEST_IMAGE $DOCKER_DATE_IMAGE
-    echo "*** Pushing $DOCKER_DATE_IMAGE"
-    docker push $DOCKER_DATE_IMAGE
-    docker tag $DOCKER_TEST_IMAGE $DOCKER_LATEST_IMAGE
-    echo "*** Pushing $DOCKER_LATEST_IMAGE"
-    docker push $DOCKER_LATEST_IMAGE
-    echo "*** Deployed $ROUTER_NAME"
-fi
+# if [ -v DOCKER_TAG ] && [ "$DOCKER_TAG" != "undefined" ]; then
+#     DOCKER_DATE_IMAGE=$DOCKER_IMAGE:$DATE-$DOCKER_TAG
+#     DOCKER_CUSTOM_IMAGE_TAG=$DOCKER_IMAGE:$DOCKER_TAG
+#     docker tag $DOCKER_TEST_IMAGE $DOCKER_DATE_IMAGE
+#     echo "*** Pushing $DOCKER_DATE_IMAGE"
+#     docker push $DOCKER_DATE_IMAGE
+#     docker tag $DOCKER_TEST_IMAGE $DOCKER_CUSTOM_IMAGE_TAG
+#     echo "*** Pushing $DOCKER_CUSTOM_IMAGE_TAG"
+#     docker push $DOCKER_CUSTOM_IMAGE_TAG
+# else
+DOCKER_DATE_IMAGE=$DOCKER_IMAGE:$DATE-latest
+DOCKER_LATEST_IMAGE=$DOCKER_IMAGE:latest
+docker tag $DOCKER_TEST_IMAGE $DOCKER_DATE_IMAGE
+echo "*** Pushing $DOCKER_DATE_IMAGE"
+docker push $DOCKER_DATE_IMAGE
+docker tag $DOCKER_TEST_IMAGE $DOCKER_LATEST_IMAGE
+echo "*** Pushing $DOCKER_LATEST_IMAGE"
+docker push $DOCKER_LATEST_IMAGE
+echo "*** Deployed $ROUTER_NAME"
+# fi
