@@ -25,7 +25,7 @@ gulp.task('osm:update', function () {
   return dl(urls, true, true)
     .pipe(gulp.dest(`${config.dataDir}/downloads/osm`))
     .pipe(validateBlobHash())
-    .pipe(testGTFSFile())
+    // .pipe(testGTFSFile())
     .pipe(gulp.dest(`${config.dataDir}/ready/osm`))
 })
 
@@ -83,8 +83,8 @@ gulp.task('gtfs:dl', gulp.series('del:id', function () {
 
   return dl(files, true, true)
     .pipe(gulp.dest(`${config.dataDir}/downloads/gtfs`))
-  //    .pipe(vinylPaths(del))
-    .pipe(testGTFSFile())
+    // .pipe(vinylPaths(del))
+    // .pipe(testGTFSFile())
     .pipe(gulp.dest(`${config.dataDir}/fit/gtfs`))
 }))
 
