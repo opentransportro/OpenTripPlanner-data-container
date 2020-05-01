@@ -19,7 +19,7 @@ jobs:
   include:
     - stage: standars check
       script: npm run test
-    - stage: build tools
-      script: ./travis-build.sh
+    # - stage: build tools
+    #     script: ./travis-build.sh
     - stage: build data containers
       script: node build.js
