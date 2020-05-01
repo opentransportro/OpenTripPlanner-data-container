@@ -22,4 +22,4 @@ jobs:
     - stage: build tools
       script: ./travis-build.sh
     - stage: build data containers
-      script: node index.js once
+      script: node build.js
