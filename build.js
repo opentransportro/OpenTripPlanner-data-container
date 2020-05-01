@@ -70,4 +70,4 @@ async function update () {
 }
 
 // entry point for script
-update();
+update()
