@@ -29,6 +29,14 @@
       "provider": "clujbike",
       "sourceType": "velotm",
       "url": "https://portal.clujbike.eu/Station/Read"
+    },
+    {
+      "id": "blacksea-bike-rental",
+      "type": "bike-rental",
+      "frequencySec": 60,
+      "provider": "blackseabike",
+      "sourceType": "velotm",
+      "url": "http://www.blackseabike.ro/Station/Read"
     }
   ],
   "boardTimes": {
