@@ -13,6 +13,7 @@ const ROMANIA_CONFIG = {
     src('timisoara', 'https://github.com/opentransportro/timisoara-gtfs-exporter/releases/download/latest/gtfs-timisoara.zip', false),
     src('sibiu', 'https://github.com/opentransportro/sibiu-gtfs-exporter/releases/download/latest/gtfs-sibiu.zip', false),
     src('bucharest', 'https://github.com/opentransportro/bucharest-gtfs-exporter/releases/download/latest/gtfs-bucharest.zip', false),
+    src('iasi', 'https://github.com/opentransportro/iasi-gtfs-exporter/releases/download/latest/gtfs-iasi.zip', false),
     src('cfr', 'https://github.com/opentransportro/cfr-gtfs-exporter/releases/download/latest/cfr.zip', false)
   ],
   'osm': 'romania'
