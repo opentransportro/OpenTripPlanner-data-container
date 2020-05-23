@@ -43,8 +43,7 @@
       "frequencySec": 30,
       "sourceType": "gtfs-http",
       "url": "https://api.opentransport.ro/realtime/trip-updates/v1/stpt",
-      "feedId": "timisoara",
-      "fuzzyTripMatching": true
+      "feedId": "timisoara"
     }
   ],
   "boardTimes": {
