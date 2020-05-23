@@ -20,7 +20,7 @@
       "frequencySec": 60,
       "provider": "velotm",
       "sourceType": "velotm",
-      "url": "http://velotm.ro/Station/Read"
+      "url": "https://api.opentransport.ro/out/velotm.ro/Station/Read"
     },
     {
       "id": "clujbike-bike-rental",
@@ -28,7 +28,7 @@
       "frequencySec": 60,
       "provider": "clujbike",
       "sourceType": "velotm",
-      "url": "https://portal.clujbike.eu/Station/Read"
+      "url": "https://api.opentransport.ro/out/clujbike.eu/Station/Read"
     },
     {
       "id": "blacksea-bike-rental",
@@ -36,15 +36,7 @@
       "frequencySec": 60,
       "provider": "blackseabike",
       "sourceType": "velotm",
-      "url": "http://www.blackseabike.ro/Station/Read"
-    },
-    {
-      "type": "stop-time-updater",
-      "frequencySec": 30,
-      "sourceType": "gtfs-http",
-      "url": "https://api.opentransport.ro/realtime/vehicle-positions/v1/stpt",
-      "feedId": "timisoara",
-      "fuzzyTripMatching": true
+      "url": "https://api.opentransport.ro/out/blackseabike.ro/Station/Read"
     },
     {
       "type": "stop-time-updater",
