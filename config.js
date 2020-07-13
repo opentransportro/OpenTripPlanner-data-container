@@ -17,7 +17,7 @@ const ROMANIA_CONFIG = {
     src('constanta', 'https://github.com/opentransportro/constanta-gtfs-exporter/releases/download/latest/gtfs-constanta.zip', false),
     src('cluj', 'https://github.com/opentransportro/cluj-gtfs-exporter/releases/download/latest/gtfs-cluj.zip', false),
     src('cfr', 'https://github.com/opentransportro/cfr-gtfs-exporter/releases/download/latest/gtfs-cfr.zip', false),
-    src('flixbus', 'http://data.ndovloket.nl/flixbus/flixbus-eu.zip', false)
+    src('flixbus', 'https://data.ndovloket.nl/flixbus/flixbus-eu.zip', false)
   ],
   'osm': 'romania'
   // 'dem': 'romania'
