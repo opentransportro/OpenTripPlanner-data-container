@@ -31,20 +31,24 @@ module.exports = function (configs, regexp) {
       }
       JSZip.loadAsync(data).then(function (zip) {
         const zips = zip.file(regexp)
-        toProcess += zips.length
-        toProcess -= 1
-        zips.forEach(f => {
-          const fileName = f.name.split('/').pop()
-          f.async('arraybuffer').then(data => {
-            const file = new Vinyl({ path: fileName, contents: Buffer.from(data) })
-            stream.push(file)
-            toProcess -= 1
-            process.stdout.write(fileName + ' Seed SUCCESS\n')
-            if (toProcess === 0) {
-              stream.end()
-            }
+        if (!zips || zips.length === 0) {
+          stream.end()
+        } else {
+          toProcess += zips.length
+          toProcess -= 1
+          zips.forEach(f => {
+            const fileName = f.name.split('/').pop()
+            f.async('arraybuffer').then(data => {
+              const file = new Vinyl({ path: fileName, contents: Buffer.from(data) })
+              stream.push(file)
+              toProcess -= 1
+              process.stdout.write(fileName + ' Seed SUCCESS\n')
+              if (toProcess === 0) {
+                stream.end()
+              }
+            })
           })
-        })
+        }
       })
     })
   })
