@@ -18,7 +18,7 @@ function setFeedId (file, id, cb) {
     if (err) cb(err)
     const zip = new JSZip()
     zip.loadAsync(data).then(function () {
-      const feedInfo = zip.file('feed-info.txt')
+      const feedInfo = zip.file('feed_info.txt')
       if (feedInfo === null) {
         const csv = `feed_publisher_name,feed_publisher_url,feed_lang,feed_id
 ${id}-fake-name,${id}-fake-url,${id}-fake-lang,${id}\n`
@@ -55,7 +55,12 @@ ${id}-fake-name,${id}-fake-url,${id}-fake-lang,${id}\n`
         }
 
         feedInfo.async('string').then(function (data) {
-          converter.csv2json(data, csv2jsonCallback)
+          // Remove unnecessary control characters that break things
+          let filteredData = data.replace(/\r/g, '')
+          if (filteredData.charAt(filteredData.length - 1) === '\n') {
+            filteredData = filteredData.slice(0, -1)
+          }
+          converter.csv2json(filteredData, csv2jsonCallback)
         })
       }
     })
