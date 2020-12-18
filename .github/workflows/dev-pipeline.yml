@@ -55,6 +55,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+          mkdir -p graphs/romania/router
           node build.js
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
