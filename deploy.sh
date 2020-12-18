@@ -33,3 +33,4 @@ docker tag $DOCKER_TEST_IMAGE $DOCKER_LATEST_IMAGE
 echo "*** Pushing $DOCKER_LATEST_IMAGE"
 docker push $DOCKER_LATEST_IMAGE
 echo "*** Deployed $ROUTER_NAME"
+
