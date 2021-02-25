@@ -2,7 +2,7 @@
 set +e
 
 # set defaults
-ORG=${ORG:-opentransport}
+ORG=${ORG:-otrro}
 JAVA_OPTS=${JAVA_OPTS:--Xmx10g}
 ROUTER_NAME=${1:-romania}
 TEST_TAG=${2:-latest}

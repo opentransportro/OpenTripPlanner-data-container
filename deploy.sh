@@ -16,11 +16,10 @@ DOCKER_IMAGE=$ORG/$CONTAINER-$ROUTER_NAME
 DOCKER_TEST_IMAGE=$DOCKER_IMAGE:test
 
 
-echo "*** Testing $ROUTER_NAME..."
+# echo "*** Testing $ROUTER_NAME..."
+# ./test.sh $ROUTER_NAME $TEST_TAG $TOOLS_TAG
+# echo "*** $ROUTER_NAME tests passed"
 
-./test.sh $ROUTER_NAME $TEST_TAG $TOOLS_TAG
-
-echo "*** $ROUTER_NAME tests passed"
 docker login -u $DOCKER_USER -p $DOCKER_AUTH
 
 
