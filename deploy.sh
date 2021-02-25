@@ -10,7 +10,7 @@ set -e
 ROUTER_NAME=${1:-romania}
 DATE=`date +"%Y-%m-%d"`
 
-ORG=${ORG:-opentransport}
+ORG=${ORG:-otrro}
 CONTAINER=opentripplanner-data-container
 DOCKER_IMAGE=$ORG/$CONTAINER-$ROUTER_NAME
 DOCKER_TEST_IMAGE=$DOCKER_IMAGE:test
