@@ -16,7 +16,7 @@ const ROMANIA_CONFIG = {
     // src('iasi', 'https://github.com/opentransportro/iasi-gtfs-exporter/releases/download/latest/gtfs-iasi.zip', false),
     src('constanta', 'https://data.opentransport.ro/routing/gtfs/gtfs-constanta.zip', false),
     src('cluj', 'https://github.com/opentransportro/cluj-gtfs-exporter/releases/download/latest/gtfs-cluj.zip', false),
-    src('cfr', 'https://data.opentransport.ro/routing/gtfs/gtfs-cfr.zip', false),
+    src('cfr', 'https://data.opentransport.ro/routing/gtfs/gtfs-cfr.zip', false)
     // src('flixbus', 'https://transitfeeds.com/p/flixbus/795/latest/download', false)
   ],
   'osm': 'romania'
