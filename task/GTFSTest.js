@@ -4,7 +4,7 @@ const exec = require('child_process').exec
 const through = require('through2')
 const { hostDataDir, dataDir, constants } = require('../config')
 const { postSlackMessage } = require('../util')
-const testTag = process.env.OTP_TAG || 'latest'
+const testTag = process.env.OTP_TAG || 'otp1-latest'
 
 /**
  * Builds an OTP graph with gtfs file. If the build is succesful we can trust
@@ -28,7 +28,7 @@ function testGTFS (gtfsFile, quiet = false) {
         const r = fs.createReadStream(gtfsFile)
         r.on('end', () => {
           try {
-            const build = exec(`docker run --rm -v ${hostDataDir}/tmp:/opt/opentripplanner/graphs --entrypoint /bin/bash opentransport/opentripplanner:${testTag} -c "java -Xmx4G -jar otp-shaded.jar --build graphs/${dir} "`,
+            const build = exec(`docker run --rm -v ${hostDataDir}/tmp:/opt/opentripplanner/graphs --entrypoint /bin/bash otrro/opentripplanner:${testTag} -c "java -Xmx4G -jar otp-shaded.jar --build graphs/${dir} "`,
               { maxBuffer: constants.BUFFER_SIZE })
             build.on('exit', function (c) {
               if (c === 0) {
