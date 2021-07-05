@@ -2,7 +2,7 @@
 set -e
 
 COMMIT_HASH=$(git rev-parse --short "$GITHUB_SHA")
-ORG=opentransportro
+ORG=otrro
 
 function imagedeploy {
     DOCKER_IMAGE=$ORG/$1
