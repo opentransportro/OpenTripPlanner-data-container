@@ -60,4 +60,4 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_AUTH: ${{ secrets.DOCKER_AUTH }}
-          OTP_TAG: otp1-latest
+          OTP_TAG: latest-otp1

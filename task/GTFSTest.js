@@ -4,7 +4,7 @@ const exec = require('child_process').exec
 const through = require('through2')
 const { hostDataDir, dataDir, constants } = require('../config')
 const { postSlackMessage } = require('../util')
-const testTag = process.env.OTP_TAG || 'otp1-latest'
+const testTag = process.env.OTP_TAG || 'latest-otp1'
 
 /**
  * Builds an OTP graph with gtfs file. If the build is succesful we can trust

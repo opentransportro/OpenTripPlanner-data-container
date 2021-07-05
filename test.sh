@@ -32,7 +32,7 @@ if [ -v TEST_TAG ] && [ "$TEST_TAG" != "undefined" ]; then
   docker run --rm --name otp-$ROUTER_NAME -e ROUTER_NAME=$ROUTER_NAME -e JAVA_OPTS=$JAVA_OPTS -e ROUTER_DATA_CONTAINER_URL=http://otp-data:8080/ --link otp-data-$ROUTER_NAME:otp-data otrro/opentripplanner:$TEST_TAG > /dev/stdout &
   sleep 5
 else
-  docker run --rm --name otp-$ROUTER_NAME -e ROUTER_NAME=$ROUTER_NAME -e JAVA_OPTS=$JAVA_OPTS -e ROUTER_DATA_CONTAINER_URL=http://otp-data:8080/ --link otp-data-$ROUTER_NAME:otp-data otrro/opentripplanner:otp1-latest > /dev/stdout &
+  docker run --rm --name otp-$ROUTER_NAME -e ROUTER_NAME=$ROUTER_NAME -e JAVA_OPTS=$JAVA_OPTS -e ROUTER_DATA_CONTAINER_URL=http://otp-data:8080/ --link otp-data-$ROUTER_NAME:otp-data otrro/opentripplanner:latest-otp1 > /dev/stdout &
   sleep 5
 fi
 echo "Getting otp ip.."
