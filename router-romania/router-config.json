@@ -40,13 +40,6 @@
     },
     {
       "type": "stop-time-updater",
-      "frequencySec": 30,
-      "sourceType": "gtfs-http",
-      "url": "https://api.opentransport.ro/realtime/trip-updates/v1/stpt",
-      "feedId": "timisoara"
-    },
-    {
-      "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
       "url": "https://api.opentransport.ro/realtime/trip-updates/tm",
